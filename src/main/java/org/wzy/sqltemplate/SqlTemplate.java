@@ -61,6 +61,15 @@ public class SqlTemplate {
 		return new SqlMeta(context.getSql(), context.getParameter());
 	}
 
+	public String buildSql(Object data) {
+
+		Context context = new Context(cfg, data);
+
+		calculate(context);
+
+		return context.getSql();
+	}
+
 	private void parseParameter(final Context context) {
 
 		String sql = context.getSql();
