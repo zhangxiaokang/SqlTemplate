@@ -9,11 +9,13 @@ import java.util.Map;
 public class SqlTemplateUtils {
 
     public static String sqlHandler(String sql, Object data) {
+        //转义字符处理 < > &
+        sql = sql.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;");
         Configuration configuration = new Configuration();
-
-        SqlTemplate template = configuration
-                .getTemplate(sql);
-        return template.buildSql(data);
+        SqlTemplate template = configuration.getTemplate(sql);
+        sql = template.buildSql(data);
+        //转义字符反向处理 < > &
+        return sql.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
     }
 
     public static void main(String[] args) {
