@@ -10,7 +10,7 @@ public class SqlTemplateUtils {
 
     public static String sqlHandler(String sql, Object data) {
         //转义字符处理 < & 把非标签内的<转义处理
-        sql = sql.replaceAll("<(?![if|/if>|where>|/where>|set>|/set>|choose>|/choose>|when|/when>|otherwise>|/otherwise>|foreach|/foreach>])", "&lt;").replaceAll("&", "&amp;");
+        sql = sql.replaceAll("<(?![if|/if>|where>|/where>|set>|/set>|choose>|/choose>|when|/when>|otherwise>|/otherwise>|foreach|/foreach>])", "&lt;").replaceAll("&", "&amp;").replaceAll("<>", "&lt;>");
         Configuration configuration = new Configuration();
         SqlTemplate template = configuration.getTemplate(sql);
         sql = template.buildSql(data);
